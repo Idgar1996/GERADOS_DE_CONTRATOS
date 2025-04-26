@@ -70,7 +70,7 @@ def login_realizado(): # Define todos os parâmetro para que a função seja exe
     except Exception as e: # Define a variavel 'e' para a condição, caso seja um erro diferente de algum ja especificado anteriormente, no caso, o erro de arquivo nao encontrado
         resultado_login.configure(text=f"Erro: {e}", text_color="red") # Mensagem definida para quando ocorrer um erro diferente do erro de nao localizar algum arquivo, que será exibida em um Label chamado resultado
 
-# ==> Função para alternar a visibilidade das senhas <==
+# ==> Função para alternar a visibilidade das senhas na tela de registro <==
 def alternar_visibilidade_senha_registro(): # Função que será usada para habilitar ou desabilitar a visibilidade das senhas
     if checkbox_mostrar_senha_registro.get() == 1: # Define que a se a caixa de seleção estiver desmarcada (0 = false {caso a checkbox esteja descelecionado}, 1 = true {caso a checkbox esteja selecionada})
         entry_senha_registro.configure(show="") # Não exibe nada no lugar da informação inserida pelo usuário no campo 'entry_senha_registro'
@@ -89,11 +89,12 @@ def alternar_visibilidade_senha_recuperar(): # Função que será usada para hab
         entry_nova_senha.configure(show="*") # Exibe no lugar da informação inserida pelo cliente no campo 'entry_nova_registro', o caracter '*', com intuito de esconder a senha do cliente
         entry_confirma_nova_senha.configure(show="*") # Exibe no lugar da informação inserida pelo cliente no campo 'entry_confirma_nova_senha', o caracter '*', com intuito de esconder a senha do cliente
 
-def alternar_visibilidade_senha_login():
-    if checkbox_mostrar_senha_login.get() == 1:
-        entry_senha_login.configure(show='')
-    else:
-        entry_senha_login.configure(show='*')
+# ==> Função para alternar a visibilidade das senhas na tela de login <==
+def alternar_visibilidade_senha_login(): # Função que é usada para habilitar ou desabilitar a visibilidade da senha
+    if checkbox_mostrar_senha_login.get() == 1: # Define que a se a caixa de seleção estiver desmarcada (0 = false {caso a checkbox esteja descelecionado}, 1 = true {caso a checkbox esteja selecionada})
+        entry_senha_login.configure(show='') # Não exibe nada no lugar da informação inserida pelo usuário no campo 'entry_senha_login'
+    else: # Função que define para a situação inversa, caso a checkbox não tenha sido marcada pelo cliente
+        entry_senha_login.configure(show='*') # Exibe no lugar da informação inserida pelo cliente no campo 'entry_senha_login', o caracter '*', com intuito de esconder a senha do cliente
 
 # ==> Função para registrar o usuário <==
 def alertas_registrar_usuario(): # Função que será usada para efetuar o registro dos dados inseridos pelo usuário
@@ -133,10 +134,10 @@ def alertas_registrar_usuario(): # Função que será usada para efetuar o regis
         app.after(3000, lambda: mensagem_registro.configure(text='')) # Define um tempo especifico para que a mensagem exibida desapareça
         return # Retorna o resultado solicitado na função acima, executa a ação que foi solicitada, no caso, exibir a mensagem caso o cliente não tenha inserido algum dado nos campos
     
-    if not resposta1 or not resposta2 or not resposta3:
-        mensagem_registro.configure(text='Responda todas perguntas de segurança!', text_color='red')
-        app.after(3000, lambda: mensagem_registro.configure(text=''))
-        return
+    if not resposta1 or not resposta2 or not resposta3: # Verifica se todos os campos na tela de registro foram preenchidos
+        mensagem_registro.configure(text='Responda todas perguntas de segurança!', text_color='red') # Caso algum dado não tenha sido preenchido, exibe o aviso para que o cliente insira todos os dados
+        app.after(3000, lambda: mensagem_registro.configure(text='')) # Define um tempo especifico para que a mensagem exibida desapareça
+        return # Retorna o resultado solicitado na função acima, executa a ação que foi solicitada, no caso, exibir a mensagem caso o cliente não tenha inserido algum dado nos campos
 
     try:
         # Salva os dados no Excel
