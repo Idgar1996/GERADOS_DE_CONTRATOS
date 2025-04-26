@@ -1,0 +1,172 @@
+import customtkinter as ctk
+
+ctk.set_appearance_mode('dark')
+
+def mostrar_frame(frame):
+    frame.tkraise()
+
+app = ctk.CTk()
+app.title("Fa�a seu contrato!")
+app.geometry("300x300")
+
+# ===== Criar os frames (telas) um sobre o outro =====
+tela_registro = ctk.CTkFrame(app)
+tela_registro.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+tela_sucesso = ctk.CTkFrame(app)
+tela_sucesso.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+tela_escolha = ctk.CTkFrame(app)
+tela_escolha.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+tela_contrato = ctk.CTkFrame(app, width=900, height=900)
+tela_contrato.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+
+# ======== Tela de Registro ========
+titulo1 = ctk.CTkLabel(tela_registro, text="Cadastre-se:")
+titulo1.pack(pady=10)
+
+label_nome = ctk.CTkLabel(tela_registro, text='Digite seu nome:')
+label_nome.pack(pady=5)
+
+campo_nome = ctk.CTkEntry(tela_registro, placeholder_text="Nome")
+campo_nome.pack(pady=5)
+
+label_telefone = ctk.CTkLabel(tela_registro, text='Digite seu n�mero de telefone:')
+label_telefone.pack(pady=5)
+
+campo_telefone = ctk.CTkEntry(tela_registro, placeholder_text="Telefone")
+campo_telefone.pack(pady=5)
+
+resultado = ctk.CTkLabel(tela_registro, text="")
+resultado.pack(pady=5)
+
+def cadastro_feito():
+    nome = campo_nome.get()
+    telefone = campo_telefone.get()
+
+    if nome and telefone:
+        resultado_login.configure(text="")
+        label_nome_sucesso.configure(text=f"Seu nome �: {nome}")
+        label_telefone_sucesso.configure(text=f"Seu telefone �: {telefone}")
+        mostrar_frame(tela_sucesso)
+    else:
+        resultado_login.configure(text="Preencha todos os campos!", text_color="red")
+
+
+botao = ctk.CTkButton(tela_registro, text="Registrar", command=cadastro_feito)
+botao.pack(pady=10)
+
+# ======== Tela de Sucesso ========
+mensagem = ctk.CTkLabel(tela_sucesso, text="Registro feito com sucesso!")
+mensagem.pack(pady=20)
+
+botao_seguinte = ctk.CTkButton(tela_sucesso, text='Seguinte',command=lambda: (app.geometry('300x600'), mostrar_frame(tela_escolha)))
+botao_seguinte.pack(pady=5)
+
+botao_voltar = ctk.CTkButton(tela_sucesso, text="Voltar", command=lambda: mostrar_frame(tela_registro))
+botao_voltar.pack(pady=5)
+
+label_nome_sucesso = ctk.CTkLabel(tela_sucesso, text="")
+label_nome_sucesso.pack(pady=5)
+
+label_telefone_sucesso = ctk.CTkLabel(tela_sucesso, text="")
+label_telefone_sucesso.pack(pady=5)
+
+
+
+# ======== Tela de Escolha ========
+titulo2 = ctk.CTkLabel(tela_escolha, text='Escolha qual documento voc� quer emitir:')
+titulo2.pack(pady=5)
+
+label_documento1 = ctk.CTkLabel(tela_escolha, text='Contrato de loca��o:')
+label_documento1.pack(pady=(10,5))
+
+botao_documento1 = ctk.CTkButton(tela_escolha, text='Contrato de Loca��o', command=lambda: (app.geometry('900x700'), mostrar_frame(tela_contrato)))
+botao_documento1.pack(pady=10)
+
+label_documento2 = ctk.CTkLabel(tela_escolha, text='Entrega de chaves')
+label_documento2.pack(pady=(10,5))
+
+botao_documento2 = ctk.CTkButton(tela_escolha, text='Entrega de chaves')
+botao_documento2.pack(pady=10)
+
+label_documento3 = ctk.CTkLabel(tela_escolha, text='Recis�o contratual')
+label_documento3.pack(pady=(10,5))
+
+botao_documento3 = ctk.CTkButton(tela_escolha, text='Recis�o contratual')
+botao_documento3.pack(pady=10)
+
+label_documento4 = ctk.CTkLabel(tela_escolha, text='Termo aditivo')
+label_documento4.pack(pady=(10,5))
+
+botao_documento4 = ctk.CTkButton(tela_escolha, text='Termo Aditivo')
+botao_documento4.pack(pady=10)
+
+label_voltar_inicio = ctk.CTkLabel(tela_escolha, text='Caso queira voltar ao in�cio')
+label_voltar_inicio.pack(pady=(10,5))
+
+botao_voltar = ctk.CTkButton(tela_escolha, text="Voltar ao in�cio", command=lambda: mostrar_frame(tela_registro))
+botao_voltar.pack(pady=5)
+
+# ======== Tela de Contrato (locador/locat�rio) ========
+# ----> Lado Locador <----
+titulo3 = ctk.CTkLabel(tela_contrato, text='Insira abaixo com as informa��es necess�rias')
+titulo3.pack(pady=5)
+
+lado_locador = ctk.CTkLabel(tela_contrato, text='Dados do LOCADOR:')
+lado_locador.place(x=50, y=30)
+
+nome_locador = ctk.CTkLabel(tela_contrato, text='Nome do locador: ')
+nome_locador.place(x=10, y=70)
+
+campo_locador = ctk.CTkEntry(tela_contrato)
+campo_locador.place(x=150, y=70)
+
+estado_civil_locador = ctk.CTkLabel(tela_contrato, text='Estado civ�l do locador:')
+estado_civil_locador.place(x=10, y=110)
+
+campo_estado_civil_locador = ctk.CTkEntry(tela_contrato)
+campo_estado_civil_locador.place(x=150, y=110)
+
+telefone_locador = ctk.CTkLabel(tela_contrato, text='Telefone do locador:')
+telefone_locador.place(x=10, y=150)
+
+campo_tel_locador = ctk.CTkEntry(tela_contrato)
+campo_tel_locador.place(x=150, y=150)
+
+profiss�o_locador = ctk.CTkLabel(tela_contrato, text='Profiss�o do Locador:')
+profiss�o_locador.place(x=10, y=190)
+
+campo_profissao_locador = ctk.CTkEntry(tela_contrato)
+campo_profissao_locador.place(x=150, y=190)
+
+rg_locador = ctk.CTkLabel(tela_contrato, text='RG do locador:')
+rg_locador.place(x=10, y=230)
+
+campo_rg_locador = ctk.CTkEntry(tela_contrato)
+campo_rg_locador.place(x=150, y=230)
+
+cpf_locador = ctk.CTkLabel(tela_contrato, text='CPF do locador:')
+cpf_locador.place(x=10, y=270)
+
+campo_cpf_locador = ctk.CTkEntry(tela_contrato)
+campo_cpf_locador.place(x=150, y=270)
+
+logradouro_locador = ctk.CTkLabel(tela_contrato, text='Endere�o do locador:')
+logradouro_locador.place(x=10, y=310)
+
+campo_log_locador = ctk.CTkTextbox(tela_contrato, width=150, height=50, wrap="word")
+campo_log_locador.place(x=150, y=310)
+
+
+
+
+
+botao_voltar = ctk.CTkButton(tela_contrato, text="Voltar ao in�cio", command=lambda: mostrar_frame(tela_registro))
+botao_voltar.place(x=450, y=650)
+# Mostrar a primeira tela
+mostrar_frame(tela_registro)
+
+app.mainloop()
