@@ -13,14 +13,14 @@ from tkinter.filedialog import asksaveasfilename
 # ===> Inicialização da Aplicação <===
 app = CTk() # Define que o 'app' será executado (aberto) utilizando o customtkinter
 app.title('Gerador de Contratos') # Define o título a ser exibido na 'janela' do app
-app.resizable(True, False) # Determina se a 'janela' será redimensionavel ou não sendo cada um dos parâmetros: (largura, altura)
-app._set_appearance_mode('dark') # Define o tema padrão ao abrir o aplicativo
+app.resizable(False, False) # Determina se a 'janela' será redimensionavel ou não sendo cada um dos parâmetros: (largura, altura)
+app._set_appearance_mode('light') # Define o tema padrão ao abrir o aplicativo
 
 
 # --------------------------------------------------------------------------------
 # ===> Centralização da Janela <===
-largura_app = 1440 # Define a largura ja 'janela'
-altura_app = 900 # Define a 'altura' da janela
+largura_app = 500 # Define a largura ja 'janela'
+altura_app = 600 # Define a 'altura' da janela
 largura_tela = app.winfo_screenwidth() # Informa o tamanho da tela (do monitor)
 altura_tela = app.winfo_screenheight() # Informa a altura da tela (do monitor)
 x = int((largura_tela - largura_app) / 2) # Define a posição em relacão ao eixo X, ou seja, na horizontal
@@ -252,6 +252,7 @@ def alterar_tema(opcao):
     app._set_appearance_mode(opcao)
   
     # Define as cores de fundo e texto com base no tema
+
     cor_fundo = "#1a1a1a" if opcao == "dark" else "#f0f0f0"  # Fundo: Escuro ou Claro
     cor_texto = "white" if opcao == "dark" else "black"       # Texto: Branco ou Preto
 
@@ -616,10 +617,6 @@ caminho_arquivo_contrato = None # Caminho do arquivo do contrato
 
 # --------------------------------------------------------------------------------
 # ===> Tela de Login <===
-logo = CTkImage(Image.open('1 pagina.png'), size=(640, 900))
-
-decoracao = CTkLabel(frame_login, text='', image=logo, bg_color='transparent')
-decoracao.place(relx=0.44, rely=0.5, anchor='e')
 
 # ComboBox para alterar o tema
 combobox_tema = CTkComboBox(
@@ -630,33 +627,33 @@ combobox_tema = CTkComboBox(
     text_color='white',
     dropdown_fg_color='#76ABDF',
     dropdown_text_color='white',
-    dropdown_font=('Source Sans Pro', 15),
+    dropdown_font=('Poppins', 15),
     width=150,
     height=30,
     corner_radius=5,
     state="readonly",  # Impede a entrada de texto
-    command=lambda opcao: alterar_tema("dark" if opcao == "Escuro" else "light")
+    command=lambda opcao: alterar_tema("light" if opcao == "Claro" else "dark")
 )
-combobox_tema.place(relx=0.95, rely=0.05, anchor='ne')
-combobox_tema.set("Escuro")  # Define o tema padrão como "Escuro"
+combobox_tema.place(relx=0.97, rely=0.03, anchor='ne')
+combobox_tema.set("Tema:")  # Define o tema padrão como "Claro"
 
 label_login = CTkLabel(
     frame_login,
     text='Faça seu login',
-    font=('Source Sans Pro', 50, 'bold'),
+    font=('Poppins', 40, 'bold'),
     text_color='white',
     fg_color='transparent'
 )
-label_login.place(relx=0.6, rely=0.35, anchor='w')
+label_login.place(relx=0.5, rely=0.25, anchor='center')
 
 label_nome_login = CTkLabel(
     frame_login,
     text='Digite seu nome:',
-    font=('Source Sans Pro', 20),
+    font=('Poppins', 16),
     text_color='white',
     fg_color='transparent'
 )
-label_nome_login.place(relx=0.6, rely=0.45, anchor='w')
+label_nome_login.place(relx=0.45, rely=0.35, anchor='e')
 
 entry_nome = CTkEntry(
     frame_login,
@@ -665,20 +662,20 @@ entry_nome = CTkEntry(
     height=40,
     fg_color='#383838',
     text_color='white',
-    font=('Source Sans Pro', 20),
+    font=('Poppins', 16),
     border_color='white',
     border_width=2,
 )
-entry_nome.place(relx=0.6, rely=0.5, anchor='w')
+entry_nome.place(relx=0.5, rely=0.41, anchor='center')
 
 label_senha = CTkLabel(
     frame_login,
     text='Digite sua senha:',
-    font=('Source Sans Pro', 20),
+    font=('Poppins', 16),
     text_color='white',
     fg_color='transparent'
 )
-label_senha.place(relx=0.6, rely=0.55, anchor='w')
+label_senha.place(relx=0.45, rely=0.48, anchor='e')
 
 entry_senha_login = CTkEntry(
     frame_login,
@@ -687,21 +684,21 @@ entry_senha_login = CTkEntry(
     height=40,
     fg_color='#383838',
     text_color='white',
-    font=('Source Sans Pro', 20),
+    font=('Poppins', 16),
     border_color='white',
     border_width=2,
     show='*'
 )
-entry_senha_login.place(relx=0.6, rely=0.6, anchor='w')
+entry_senha_login.place(relx=0.5, rely=0.54, anchor='center')
 
 checkbox_mostrar_senha_login = CTkCheckBox(
     frame_login,
     text="Mostrar Senha",
     text_color='white',
-    font=('Source Sans Pro', 15),
+    font=('Poppins', 15),
     command=lambda: alternar_visibilidade_senha_login()
 )
-checkbox_mostrar_senha_login.place(relx=0.6, rely=0.65, anchor='w')
+checkbox_mostrar_senha_login.place(relx=0.45, rely=0.6, anchor='e')
 
 botao_login = CTkButton(
     frame_login,
@@ -713,28 +710,28 @@ botao_login = CTkButton(
     fg_color='#2454FF',
     hover_color='#002387',
     text_color='white',
-    font=('Source Sans Pro', 20, 'bold', 'underline'),
+    font=('Poppins', 20, 'bold', 'underline'),
     command=login_realizado
 )
-botao_login.place(relx=0.6, rely=0.7, anchor='w')
+botao_login.place(relx=0.5, rely=0.7, anchor='center')
 
 resultado_login = CTkLabel(
     frame_login,
     text="",
-    font=('Source Sans Pro', 20, 'bold', 'underline'),
+    font=('Poppins', 20, 'bold', 'underline'),
     fg_color='transparent'
 )
-resultado_login.place(relx=0.6, rely=0.75, anchor='w')
+resultado_login.place(relx=0.5, rely=0.75, anchor='center')
 
 label_esqueci_senha = CTkLabel(
     frame_login,
     text='Esqueci minha senha',
     text_color='white',
-    font=('Source Sans Pro', 20, 'bold', 'underline'),
+    font=('Poppins', 20, 'bold', 'underline'),
     cursor='hand2',
     
 )
-label_esqueci_senha.place(relx=0.6, rely=0.84, anchor='w')
+label_esqueci_senha.place(relx=0.5, rely=0.84, anchor='center')
 
 label_esqueci_senha.bind('<Button-1>', lambda e: mostrar_frame(frame_recuperar_senha))
 
@@ -743,10 +740,10 @@ botao_registro = CTkLabel(
     frame_login,
     text='Registrar-se',
     text_color='white',
-    font=('Source Sans Pro', 20, 'bold', 'underline'),
+    font=('Poppins', 20, 'bold', 'underline'),
     cursor='hand2'
 )
-botao_registro.place(relx=0.6, rely=0.88, anchor='w')
+botao_registro.place(relx=0.5, rely=0.88, anchor='center')
 botao_registro.bind('<Button-1>', lambda e: mostrar_frame(frame_registro))
 
 
@@ -2254,6 +2251,10 @@ caixa_texto_contrato = CTkTextbox(
     corner_radius=10
 )
 caixa_texto_contrato.place(relx=0.65, rely=0.5, anchor='center')
+
+# --------------------------------------------------------------------------------
+# ===> Configuração inicial do tema <===
+alterar_tema('light')  # Aplica o tema claro ao iniciar o aplicativo
 
 # --------------------------------------------------------------------------------
 # ===> Inicia o aplicativo <===
