@@ -13,19 +13,16 @@ from tkinter.filedialog import asksaveasfilename
 # ===> Inicialização da Aplicação <===
 app = CTk() # Define que o 'app' será executado (aberto) utilizando o customtkinter
 app.title('Gerador de Contratos') # Define o título a ser exibido na 'janela' do app
-app.resizable(False, False) # Determina se a 'janela' será redimensionavel ou não sendo cada um dos parâmetros: (largura, altura)
+
 app._set_appearance_mode('light') # Define o tema padrão ao abrir o aplicativo
 
 
 # --------------------------------------------------------------------------------
 # ===> Centralização da Janela <===
-largura_app = 500 # Define a largura ja 'janela'
-altura_app = 600 # Define a 'altura' da janela
+
 largura_tela = app.winfo_screenwidth() # Informa o tamanho da tela (do monitor)
 altura_tela = app.winfo_screenheight() # Informa a altura da tela (do monitor)
-x = int((largura_tela - largura_app) / 2) # Define a posição em relacão ao eixo X, ou seja, na horizontal
-y = int((altura_tela - altura_app) / 2) # Define a posição em relação ao eixo Y, ou seja, vertical
-app.geometry(f"{largura_app}x{altura_app}+{x}+{y}") # Define a posição em que a 'janela' será aberta, tendo como referência o lado esquerdo, ou seja: largura_app = largura da 'janela'; altura_app = altura da 'janela'; x e y são as posições com os eixos x partindo da esquerda e y partindo do topo
+app.geometry(f'{largura_tela}x{altura_tela}+0+0')
 
 
 # --------------------------------------------------------------------------------
@@ -62,11 +59,11 @@ def login_realizado(): # Define todos os parâmetro para que a função seja exe
             resultado_login.configure(text="") # Limpa o campo 'resultado', caso tenha sido exibido alguma mensagem anteriormente; 'configure()' é usado para atualizar o texto dos labels
             mostrar_frame(frame_opcoes)  # Redireciona para a tela de opções
         else: # Caso nenhum dos parametros acima tenham sido satisfeitos, executa o a funcão abaixo
-            resultado_login.configure(text="Nome ou senha incorretos!", text_color="#FFD700") # Define o texto que sera exibido caso, os parametros 'nome' e 'senha' tenham sido preenchidos do forma diferente do armazenado no arquivo excel
+            resultado_login.configure(text="Nome ou senha incorretos!", text_color="red") # Define o texto que sera exibido caso, os parametros 'nome' e 'senha' tenham sido preenchidos do forma diferente do armazenado no arquivo excel
             app.after(3000, lambda: resultado_login.configure(text=''))
 
     except FileNotFoundError: # Função que é usada quando um determinado arquivo, não é localizado, nesse caso o documento excel
-        resultado_login.configure(text="Arquivo de usuários não encontrado!", text_color="#FFD700") # Mensagem definida para quando um determinado arquivo já determinado, não seja mais localizado, que será exibida em um Label chamado resultado
+        resultado_login.configure(text="Arquivo de usuários não encontrado!", text_color="red") # Mensagem definida para quando um determinado arquivo já determinado, não seja mais localizado, que será exibida em um Label chamado resultado
     except Exception as e: # Define a variavel 'e' para a condição, caso seja um erro diferente de algum ja especificado anteriormente, no caso, o erro de arquivo nao encontrado
         resultado_login.configure(text=f"Erro: {e}", text_color="red") # Mensagem definida para quando ocorrer um erro diferente do erro de nao localizar algum arquivo, que será exibida em um Label chamado resultado
 
@@ -253,11 +250,17 @@ def alterar_tema(opcao):
   
     # Define as cores de fundo e texto com base no tema
 
-    cor_fundo = "#1a1a1a" if opcao == "dark" else "#f0f0f0"  # Fundo: Escuro ou Claro
+    cor_entrys = '#848482' if opcao == 'dark' else 'white'
+    cor_fundo = "black" if opcao == "dark" else "#E4EAF3"  # Fundo: Escuro ou Claro
     cor_texto = "white" if opcao == "dark" else "black"       # Texto: Branco ou Preto
-
+    cor_frame_central = '#1a1a1a' if opcao == 'dark' else 'white'
+    cor_anuncio_login = 'black' if opcao == 'light' else 'white'
+    cor_combobox_tema = '#848482' if opcao == 'dark' else 'white'
+    cor_recuperacao_registrar = 'white' if opcao == 'dark' else 'black'
+    
     # Atualiza a cor de fundo dos frames
     frame_login.configure(fg_color=cor_fundo)
+    frame_centro_login.configure(fg_color=cor_frame_central)
     frame_registro.configure(fg_color=cor_fundo)
     frame_opcoes.configure(fg_color=cor_fundo)
     frame_dados_cliente.configure(fg_color=cor_fundo)
@@ -265,20 +268,24 @@ def alterar_tema(opcao):
     frame_termo_aditivo.configure(fg_color=cor_fundo)
 
     # Atualiza a cor do texto nos elementos da tela de login
-    label_login.configure(text_color=cor_texto)
+    label_login.configure(text_color=cor_anuncio_login)
     label_nome_login.configure(text_color=cor_texto)
     label_senha.configure(text_color=cor_texto)
-    entry_nome.configure(fg_color = cor_fundo,
-                        border_width = 2.5,
-                        border_color='#1a1a1a')
-    entry_senha_login.configure(fg_color = cor_fundo,
-                        border_width = 2.5,
-                        border_color='#1a1a1a')
-    combobox_tema.configure(fg_color= cor_fundo,    
+    entry_nome.configure(fg_color = cor_entrys,
+                        border_width = 2,
+                        border_color='black',
+                        placeholder_text_color='black')
+    entry_senha_login.configure(fg_color = cor_entrys,
+                        border_width = 2,
+                        border_color='black',
+                        placeholder_text_color='black')
+    combobox_tema.configure(fg_color= cor_combobox_tema,    
                         text_color=cor_texto)
-    resultado_login.configure(text_color="#FFD700" if opcao == "dark" else "red")  # Mensagem de erro
-    label_esqueci_senha.configure(text_color=cor_texto)
-    botao_registro.configure(text_color=cor_texto)
+    resultado_login.configure(text_color="red" if opcao == "dark" else "darkred")  # Mensagem de erro
+    botao_esqueci_senha.configure(text_color=cor_recuperacao_registrar)
+    botao_registro.configure(text_color=cor_recuperacao_registrar)
+    botao_login.configure(text_color=cor_texto)
+    checkbox_mostrar_senha_login.configure(text_color=cor_texto)
 
     # Atualiza o estado do campo de senha na tela de login
     if checkbox_mostrar_senha_login.get() == 1:  # Se o checkbox estiver marcado
@@ -581,28 +588,28 @@ def selecionar_contrato_para_atualizar():
 
 # --------------------------------------------------------------------------------
 # ===> Frames (Telas) <===
-frame_login = CTkFrame(app, fg_color='transparent')
-frame_login.place(relx=0.5, rely=0.5, anchor='center', relwidth=1, relheight=1)
+frame_login = CTkFrame(app,corner_radius=0)
+frame_login.place(relx=0.5, rely=0.5, anchor='center', relwidth=1, relheight=1,)
 
-frame_registro = CTkFrame(app, fg_color='#1a1a1a')  # tela futura
+frame_registro = CTkFrame(app,)  # tela futura
 frame_registro.place(relx=0.5, rely=0.5, anchor='center', relwidth=1, relheight=1)
 
-frame_recuperar_senha = CTkFrame(app, fg_color='#1a1a1a')  # tela futura
+frame_recuperar_senha = CTkFrame(app,)  # tela futura
 frame_recuperar_senha.place(relx=0.5, rely=0.5, anchor='center', relwidth=1, relheight=1)
 
-frame_opcoes = CTkFrame(app, fg_color='#1a1a1a')  # tela opcoes
+frame_opcoes = CTkFrame(app)  # tela opcoes
 frame_opcoes.place(relx=0.5, rely=0.5, anchor='center', relwidth=1, relheight=1)
 
-frame_dados_cliente = CTkFrame(app, fg_color='#1a1a1a')  # tela futura
+frame_dados_cliente = CTkFrame(app)  # tela futura
 frame_dados_cliente.place(relx=0.5, rely=0.5, anchor='center', relwidth=1, relheight=1)
 
-frame_dados_financeiros = CTkFrame(app, fg_color='#1a1a1a')  # tela futura
+frame_dados_financeiros = CTkFrame(app)  # tela futura
 frame_dados_financeiros.place(relx=0.5, rely=0.5, anchor='center', relwidth=1, relheight=1)
 
-frame_termo_aditivo = CTkFrame(app, fg_color='#1a1a1a')  # Tela de termo aditivo
+frame_termo_aditivo = CTkFrame(app)  # Tela de termo aditivo
 frame_termo_aditivo.place(relx=0.5, rely=0.5, anchor='center', relwidth=1, relheight=1)
 
-frame_customizar_contrato = CTkFrame(app, fg_color='#1a1a1a')  # Tela de customização de contrato
+frame_customizar_contrato = CTkFrame(app)  # Tela de customização de contrato
 frame_customizar_contrato.place(relx=0.5, rely=0.5, anchor='center', relwidth=1, relheight=1)
 
 
@@ -618,18 +625,27 @@ caminho_arquivo_contrato = None # Caminho do arquivo do contrato
 # --------------------------------------------------------------------------------
 # ===> Tela de Login <===
 
+frame_centro_login = CTkFrame(
+    frame_login,
+    fg_color='white',
+    corner_radius=30,
+    width=500,
+    height=500
+)
+frame_centro_login.place(relx=0.5, rely=0.5, anchor='center')
+
 # ComboBox para alterar o tema
 combobox_tema = CTkComboBox(
     frame_login,
     values=["Escuro", "Claro"],  # Opções de tema
-    font=('Source Sans Pro', 15),
+    font=('Inter', 15),
     fg_color='#383838',
     text_color='white',
     dropdown_fg_color='#76ABDF',
     dropdown_text_color='white',
-    dropdown_font=('Poppins', 15),
+    dropdown_font=('Inter', 15),
     width=150,
-    height=30,
+    height=30,  
     corner_radius=5,
     state="readonly",  # Impede a entrada de texto
     command=lambda opcao: alterar_tema("light" if opcao == "Claro" else "dark")
@@ -640,110 +656,107 @@ combobox_tema.set("Tema:")  # Define o tema padrão como "Claro"
 label_login = CTkLabel(
     frame_login,
     text='Faça seu login',
-    font=('Poppins', 40, 'bold'),
+    font=('Inter Thin', 50, 'bold',),
     text_color='white',
-    fg_color='transparent'
+    fg_color='transparent',
+    bg_color='transparent'
 )
-label_login.place(relx=0.5, rely=0.25, anchor='center')
+label_login.place(relx=0.5, rely=0.21, anchor='center')
 
 label_nome_login = CTkLabel(
-    frame_login,
+    frame_centro_login,
     text='Digite seu nome:',
-    font=('Poppins', 16),
+    font=('Inter', 25),
     text_color='white',
     fg_color='transparent'
 )
-label_nome_login.place(relx=0.45, rely=0.35, anchor='e')
+label_nome_login.place(relx=0.4, rely=0.13,anchor='center')
 
 entry_nome = CTkEntry(
-    frame_login,
+    frame_centro_login,
     placeholder_text='Nome',
     width=300,
     height=40,
-    fg_color='#383838',
-    text_color='white',
-    font=('Poppins', 16),
-    border_color='white',
+    text_color='black',
+    font=('Inter', 20),
+    border_color='#BEBFC5',
     border_width=2,
+    corner_radius=12
 )
-entry_nome.place(relx=0.5, rely=0.41, anchor='center')
+entry_nome.place(relx=0.5, rely=0.21,anchor='center')
 
 label_senha = CTkLabel(
-    frame_login,
+    frame_centro_login,
     text='Digite sua senha:',
-    font=('Poppins', 16),
+    font=('Inter', 25),
     text_color='white',
     fg_color='transparent'
 )
-label_senha.place(relx=0.45, rely=0.48, anchor='e')
+label_senha.place(relx=0.4, rely=0.33, anchor='center')
 
 entry_senha_login = CTkEntry(
-    frame_login,
+    frame_centro_login,
     placeholder_text='Senha',
     width=300,
     height=40,
-    fg_color='#383838',
-    text_color='white',
-    font=('Poppins', 16),
-    border_color='white',
+    text_color='black',
+    font=('Inter', 20),
+    border_color='#BEBFC5',
     border_width=2,
+    corner_radius=12,
     show='*'
 )
-entry_senha_login.place(relx=0.5, rely=0.54, anchor='center')
+entry_senha_login.place(relx=0.5, rely=0.41,anchor='center')
 
 checkbox_mostrar_senha_login = CTkCheckBox(
-    frame_login,
+    frame_centro_login,
     text="Mostrar Senha",
-    text_color='white',
-    font=('Poppins', 15),
+    font=('Inter', 16),
+    bg_color='white',
     command=lambda: alternar_visibilidade_senha_login()
 )
-checkbox_mostrar_senha_login.place(relx=0.45, rely=0.6, anchor='e')
+checkbox_mostrar_senha_login.place(relx=0.35, rely=0.5, anchor='center')
 
-botao_login = CTkButton(
-    frame_login,
+botao_login = CTkButton(    
+    frame_centro_login,
     text='Logar',
     width=300,
     height=50,
-    border_width=2,
-    border_color='white',
-    fg_color='#2454FF',
-    hover_color='#002387',
+    corner_radius=12,
+    fg_color='#16A34A',
+    hover_color='#2E8B57',
     text_color='white',
-    font=('Poppins', 20, 'bold', 'underline'),
+    font=('Inter', 16, 'bold', 'underline'),
     command=login_realizado
 )
-botao_login.place(relx=0.5, rely=0.7, anchor='center')
+botao_login.place(relx=0.5, rely=0.6, anchor='center')
 
 resultado_login = CTkLabel(
-    frame_login,
+    frame_centro_login,
     text="",
-    font=('Poppins', 20, 'bold', 'underline'),
+    font=('Inter', 20, 'bold', 'underline'),
     fg_color='transparent'
 )
-resultado_login.place(relx=0.5, rely=0.75, anchor='center')
+resultado_login.place(relx=0.5, rely=0.7, anchor='center')
 
-label_esqueci_senha = CTkLabel(
-    frame_login,
+botao_esqueci_senha = CTkLabel(
+    frame_centro_login,
     text='Esqueci minha senha',
     text_color='white',
-    font=('Poppins', 20, 'bold', 'underline'),
-    cursor='hand2',
-    
+    font=('Inter', 20, 'bold', 'underline'),
+    cursor='hand2',   
 )
-label_esqueci_senha.place(relx=0.5, rely=0.84, anchor='center')
-
-label_esqueci_senha.bind('<Button-1>', lambda e: mostrar_frame(frame_recuperar_senha))
-
+botao_esqueci_senha.place(relx=0.5, rely=0.77, anchor='center')
+botao_esqueci_senha.bind('<Button-1>', lambda e: mostrar_frame(frame_recuperar_senha))
 
 botao_registro = CTkLabel(
-    frame_login,
+    frame_centro_login,
     text='Registrar-se',
     text_color='white',
-    font=('Poppins', 20, 'bold', 'underline'),
+    font=('Inter', 20, 'bold', 'underline'),
     cursor='hand2'
 )
-botao_registro.place(relx=0.5, rely=0.88, anchor='center')
+botao_registro.place(relx=0.5, rely=0.84, anchor='center')
 botao_registro.bind('<Button-1>', lambda e: mostrar_frame(frame_registro))
 
 
@@ -752,7 +765,7 @@ botao_registro.bind('<Button-1>', lambda e: mostrar_frame(frame_registro))
 opcoes_topo = CTkFrame(
     frame_registro,
     fg_color='#A9A9A9',
-    width=1440,
+    width=largura_tela,
     height=50
 )
 opcoes_topo.place(relx=0.5, rely=0, anchor='n')
@@ -771,7 +784,7 @@ botao_voltar = CTkButton(
     text='Voltar',
     text_color='white',
     font=('Source Sans Pro', 20, 'bold', 'underline'),
-    command=lambda: [limpar_todos_campos(frame_registro, frame_login), mostrar_frame(frame_login)]
+    command=lambda: [limpar_todos_campos(frame_registro, frame_centro_login), mostrar_frame(frame_login)]
 )
 botao_voltar.place(relx=0.95, rely=0.5, anchor='center')
 
@@ -1342,7 +1355,7 @@ botao_voltar = CTkButton(
     text='Voltar',
     text_color='white',
     font=('Source Sans Pro', 20, 'bold', 'underline'),
-    command=lambda: [limpar_todos_campos(frame_login),mensagem_erro_termo_aditivo.configure(text="") ,mostrar_frame(frame_login)]
+    command=lambda: [limpar_todos_campos(frame_registro, frame_centro_login),mensagem_erro_termo_aditivo.configure(text="") ,mostrar_frame(frame_login)]
 )
 botao_voltar.place(relx=0.95, rely=0.5, anchor='center')
 
