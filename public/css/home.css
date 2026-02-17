@@ -1,60 +1,98 @@
-.card {
-  top: 500px;
-  left: 600px;
-  width: 360px;
-  height: 324px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.text {
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.tela {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: auto;
+  background-color: #a4aaee7a;
+  border-radius: 8px;
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.25);
+  padding: 15px 0 15px 0;
+  gap: 12px;
+  justify-content: start;
+  align-items: center;
+}
+
+.titulo {
   color: #030303;
   font-size: 24px;
-  font-family: "Cabin", sans-serif;
   font-weight: 600;
   line-height: 32px;
   text-align: center;
 }
-
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.entradas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.entryEmail {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  gap: 4px;
+}
 .email {
-  top: 376px;
-  left: 572px;
   width: 296px;
   height: 42px;
   padding: 0px 8px;
-  border: 1px solid #ececec;
+  border: 1px solid #a4aaee7a;
   box-sizing: border-box;
   border-radius: 8px;
-  background-color: #ffffff;
-  color: #94a3b8;
-  font-size: 13px;
-  font-family: "Cabin", sans-serif;
+  background-color: #ececec;
+  font-size: 14px;
   line-height: 42px;
   outline: none;
+  transition: all 0.1s ease-in-out;
 }
-
+.email:focus {
+  transform: scale(1.02);
+  box-shadow: 2px 2px 3px #5a5959;
+}
+.entrySenha {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  gap: 4px;  
+}
 .senha {
-  top: 434px;
-  left: 572px;
   width: 296px;
   height: 42px;
   padding: 0px 8px;
-  border: 1px solid #ececec;
+  border: 1px solid #a4aaee7a;
   box-sizing: border-box;
   border-radius: 8px;
-  background-color: #ffffff;
-  color: #94a3b8;
-  font-size: 13px;
-  font-family: "Cabin", sans-serif;
+  background-color: #ececec;
+  font-size: 14px;
   line-height: 42px;
   outline: none;
+  transition: all 0.1s ease-in-out;
 }
-
+.senha:focus {
+  transform: scale(1.02);
+  box-shadow: 2px 2px 3px #5a5959;
+}
 .enviar {
   cursor: pointer;
-  top: 500px;
-  left: 572px;
   width: 296px;
   height: 40px;
   padding: 0px 8px;
@@ -64,16 +102,18 @@
   background-color: #5664f5;
   color: #ffffff;
   font-size: 16px;
-  font-family: "Cabin", sans-serif;
   font-weight: 600;
   line-height: 24px;
   outline: none;
+  transition: all 0.2s ease;
 }
-
+.enviar:hover {
+  transform: scale(1.05);
+  background-color: #2c39c0;
+}
 .esqueceu {
   color: #030303;
   font-size: 16px;
-  font-family: "Cabin", sans-serif;
   line-height: 24px;
   text-align: center;
 }
