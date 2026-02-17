@@ -7,21 +7,21 @@
     <title>Gerador de Contratos</title>
     <link rel="stylesheet"  href= "{{ asset('css/home.css') }}"/>
 </head>
-<body>
+<body class="tela">
     <div class="card">
-        <h2 class="text">Faça login</h2>
-        <form action="POST">
+        <h2 class="titulo">Faça login</h2>
+        <form action="POST" class="formulario">
             @csrf
-            <div>
-                <label for="email">E-mail</label><br>
-                <input type="email" id="email" name="email" placeholder="E-mail" class="email">
+            <div class="entradas">
+                <div class="entryEmail">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="E-mail" class="email">
+                </div>
+                <div class="entrySenha">
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" id="senha" placeholder="Senha" class="senha">
+                </div>
             </div>
-            <br>
-            <div>
-                <label for="senha">Senha</label><br>
-                <input type="password" name="senha" id="senha" placeholder="Senha" class="senha">
-            </div>
-            <br>
             <div>
                 <button type="submit" class="enviar">Entrar</button>
             </div>
