@@ -1,0 +1,79 @@
+.card {
+  top: 500px;
+  left: 600px;
+  width: 360px;
+  height: 324px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+}
+
+.text {
+  color: #030303;
+  font-size: 24px;
+  font-family: "Cabin", sans-serif;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: center;
+}
+
+.email {
+  top: 376px;
+  left: 572px;
+  width: 296px;
+  height: 42px;
+  padding: 0px 8px;
+  border: 1px solid #ececec;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #94a3b8;
+  font-size: 13px;
+  font-family: "Cabin", sans-serif;
+  line-height: 42px;
+  outline: none;
+}
+
+.senha {
+  top: 434px;
+  left: 572px;
+  width: 296px;
+  height: 42px;
+  padding: 0px 8px;
+  border: 1px solid #ececec;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #94a3b8;
+  font-size: 13px;
+  font-family: "Cabin", sans-serif;
+  line-height: 42px;
+  outline: none;
+}
+
+.enviar {
+  cursor: pointer;
+  top: 500px;
+  left: 572px;
+  width: 296px;
+  height: 40px;
+  padding: 0px 8px;
+  border: 0;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: #5664f5;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Cabin", sans-serif;
+  font-weight: 600;
+  line-height: 24px;
+  outline: none;
+}
+
+.esqueceu {
+  color: #030303;
+  font-size: 16px;
+  font-family: "Cabin", sans-serif;
+  line-height: 24px;
+  text-align: center;
+}
