@@ -1,97 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
 :root {
   font-family: Arial, Helvetica, sans-serif;
+  --bg: #f2f2f2;
+  --card: #ffffff;
+  --text: #000000;
+  --primary: #4f6ef7;
+  --primary-hover: #6c86fa;
+  --input: #f1f1f1;
+  --placeholder: #6b7280;
+}
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f8fafc;
+  --primary: #818cf8;
+  --primary-hover: #6366f1;
+  --input: #334155;
+  --placeholder: #cdb5f5;
 }
 .tela {
   width: 100vw;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: var(--bg);
+  padding: 20px 0 20px 0;
+}
+.theme-toggle {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #ddd;
+  border-radius: 30px;
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+}
+
+.theme-toggle button {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 20px;
+  opacity: 0.4;
+}
+
+.theme-toggle button.active {
+  background: var(--primary);
+  color: white;
+  opacity: 1;
 }
 .card {
   display: flex;
   flex-direction: column;
   width: 400px;
   height: auto;
-  background-color: #a4aaee7a;
-  border-radius: 8px;
+  background-color: var(--card);
+  border-radius: 12px;
   box-shadow: 2px 4px 8px rgba(0,0,0,0.25);
-  padding: 15px 0 15px 0;
+  padding: 15px 15px 15px 15px;
   gap: 12px;
   justify-content: start;
   align-items: center;
 }
+.icone {
+  width: 100px;
+  border-radius: 12px;
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.25);
+}
 
 .titulo {
-  color: #030303;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 32px;
+  color: var(--text);
   text-align: center;
+}
+.intro{
+  color: var(--text);
+  font-size: 22px;
+  text-align: center;
+}
+.mensagem-erro {
+    background-color: #fdecea;
+    color: #b71c1c;
+    border: 1px solid #f5c2c2;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 12px 0;
+    text-align: center;
+    font-size: 0.9rem;
 }
 .formulario {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  color: var(--text);
 }
-.entradas {
+.form-group {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-.entryEmail {
+.form-field-email {
   display: flex;
   flex-direction: column;
   height: auto;
   gap: 4px;
 }
-.email {
+.form-input-email, .form-input-senha {
   width: 296px;
   height: 42px;
   padding: 0px 8px;
-  border: 1px solid #a4aaee7a;
+  border: 1.5px solid #CBD5E1;
   box-sizing: border-box;
   border-radius: 8px;
-  background-color: #ececec;
+  background-color: var(--input);
   font-size: 14px;
   line-height: 42px;
   outline: none;
   transition: all 0.1s ease-in-out;
+  color: var(--text);
 }
-.email:focus {
+.form-input-email:focus, .form-input-senha:focus {
   transform: scale(1.02);
   box-shadow: 2px 2px 3px #5a5959;
 }
-.entrySenha {
+.form-field-senha {
   display: flex;
   flex-direction: column;
   height: auto;
   gap: 4px;  
 }
-.senha {
-  width: 296px;
-  height: 42px;
-  padding: 0px 8px;
-  border: 1px solid #a4aaee7a;
-  box-sizing: border-box;
-  border-radius: 8px;
-  background-color: #ececec;
-  font-size: 14px;
-  line-height: 42px;
-  outline: none;
-  transition: all 0.1s ease-in-out;
-}
-.senha:focus {
-  transform: scale(1.02);
-  box-shadow: 2px 2px 3px #5a5959;
-}
-.enviar {
+
+.form-button {
   cursor: pointer;
   width: 296px;
   height: 40px;
@@ -99,7 +150,7 @@
   border: 0;
   box-sizing: border-box;
   border-radius: 8px;
-  background-color: #5664f5;
+  background-color: var(--primary);
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
@@ -107,13 +158,23 @@
   outline: none;
   transition: all 0.2s ease;
 }
-.enviar:hover {
+.form-button:hover {
   transform: scale(1.05);
-  background-color: #2c39c0;
+  background-color: var(--primary-hover);
 }
-.esqueceu {
-  color: #030303;
+.links {
+  min-width: 100%;
+  align-items: start;
+  display: flex;
+  flex-direction: column;
+}
+.esqueceu, .cadastro {
+  text-decoration: none underline;
+  color: var(--text);
   font-size: 16px;
   line-height: 24px;
   text-align: center;
+}
+.esqueceu:hover, .cadastro:hover{
+  color: #2c39c0;
 }
