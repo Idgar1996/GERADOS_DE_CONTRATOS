@@ -1,34 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gerador de Contratos</title>
-    <link rel="stylesheet"  href= "{{ asset('css/home.css') }}"/>
-</head>
-<body class="tela">
-    <div class="card">
-        <h2 class="titulo">Faça login</h2>
-        <form action="POST" class="formulario">
-            @csrf
-            <div class="entradas">
-                <div class="entryEmail">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="E-mail" class="email">
-                </div>
-                <div class="entrySenha">
-                    <label for="senha">Senha</label>
-                    <input type="password" name="senha" id="senha" placeholder="Senha" class="senha">
-                </div>
+@extends('layouts.app')
+
+@section('title', 'Gerador de Contratos')
+
+@section('content')
+<section class="card">
+    <img src="{{ asset('assets/imagens/icone_contrato.png') }}" alt="Icone de documento representando contratos" class="icone">
+    <h1 class="titulo">Gerador de contratos</h1>
+    <p class="intro">Sistema de criação e gestão contratual</p>
+    <br>
+
+    @if(session('erro'))
+        <p class="mensagem-erro" role="alert" id="mensagem-erro">
+            {{ session("erro") }}
+        </p>
+    @endif
+
+    <form method="POST" class="formulario">
+        @csrf
+        <div class="form-group">
+            <div class="form-field-email">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="E-mail" class="form-input-email" required>
             </div>
-            <div>
-                <button type="submit" class="enviar">Entrar</button>
+
+            <div class="form-field-senha">
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" id="senha" placeholder="Senha" class="form-input-senha" required>
             </div>
-            <div>
-                <a href="#" class="esqueceu">Esqueceu a senha</a>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
+        </div>
+
+        <div>
+            <button type="submit" class="form-button">Entrar</button>
+        </div>
+
+        <nav class="links">
+            <a href="{{ route('cadastro') }}" class="cadastro">Não tem cadastro?</a>
+            <a href="#" class="esqueceu">Esqueceu a senha</a>
+        </nav>
+    </form>
+</section>
+@endsection
